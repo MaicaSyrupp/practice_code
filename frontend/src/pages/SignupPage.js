@@ -14,22 +14,16 @@ function SignupPage() {
         e.preventDefault();
         console.log("Form Data: ", formData); // Log the form data to ensure it's being captured correctly
         try {
-            // Ensure the URL is correct. Use /api/users/signup
-            const response = await axios.post('https://practice-code-tan.vercel.app/api/users/signup', formData);
+            // Check the backend request URL
+            const response = await axios.post('http://localhost:5000/api/users/signup', formData);
             console.log("Response: ", response.data); // Log the response from the server
             setMessage(response.data.message); // Display the response message
         } catch (error) {
-            // Improved error handling to capture both network issues and backend errors
+            // Log the error response or message
             console.error("Error: ", error.response?.data || error.message);
-            if (error.response) {
-                setMessage(error.response?.data?.message || 'Something went wrong');
-            } else if (error.request) {
-                setMessage('Network error. Please try again later.');
-            } else {
-                setMessage(`Error: ${error.message}`);
-            }
+            setMessage(error.response?.data?.message || 'Something went wrong');
         }
-    };
+    };    
 
     return (
         <div>

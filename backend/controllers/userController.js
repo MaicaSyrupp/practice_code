@@ -5,7 +5,6 @@ const User = require('../models/User');
 // Register a user
 const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
-    console.log("Received registration request", req.body); // Debug log
 
     try {
         // Check if user exists
