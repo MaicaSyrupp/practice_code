@@ -13,7 +13,7 @@ function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/users/login', formData);
+            const response = await axios.post('https://practice-code-tan.vercel.app/login', formData);
             setMessage(`Login successful! Token: ${response.data.token}`);
         } catch (error) {
             setMessage(error.response?.data?.message || 'Invalid credentials');

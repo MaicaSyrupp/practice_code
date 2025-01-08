@@ -15,7 +15,7 @@ function SignupPage() {
         console.log("Form Data: ", formData); // Log the form data to ensure it's being captured correctly
         try {
             // Check the backend request URL
-            const response = await axios.post('http://localhost:5000/api/users/signup', formData);
+            const response = await axios.post('https://practice-code-tan.vercel.app/api/users/signup', formData);
             console.log("Response: ", response.data); // Log the response from the server
             setMessage(response.data.message); // Display the response message
         } catch (error) {
