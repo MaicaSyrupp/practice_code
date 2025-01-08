@@ -13,10 +13,21 @@ function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('https://practice-code-tan.vercel.app/login', formData);
+            // Ensure the URL is correct. Use /api/users/login instead of /login
+            const response = await axios.post('https://practice-code-tan.vercel.app/api/users/login', formData);
             setMessage(`Login successful! Token: ${response.data.token}`);
         } catch (error) {
-            setMessage(error.response?.data?.message || 'Invalid credentials');
+            // Improved error handling to capture both network issues and backend errors
+            if (error.response) {
+                // Request was made and the server responded with a status code that falls out of the range of 2xx
+                setMessage(error.response?.data?.message || 'Invalid credentials');
+            } else if (error.request) {
+                // The request was made but no response was received
+                setMessage('Network error. Please try again later.');
+            } else {
+                // Something else happened while setting up the request
+                setMessage(`Error: ${error.message}`);
+            }
         }
     };
 
